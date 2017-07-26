@@ -5,7 +5,8 @@ const QUESTIONS = [
     b: "Joseph and Catherine",
     c: "John and Mary",
     d: "George and Anne",
-    answer: "c"
+    answer: "c",
+    correctStatus: false
   },
   {
     question: "When did the Liberty Bell get its name?",
@@ -13,7 +14,8 @@ const QUESTIONS = [
     b: "When it rang on July 4, 1776",
     c: "In the 19th century, when it became a symbol of the abolition of slavery",
     d: "None of the above",
-    answer: "c"
+    answer: "c",
+    correctStatus: false
   },
   {
     question: "Which of the following items was owned by the fewest U.S. homes in 1990?",
@@ -21,15 +23,17 @@ const QUESTIONS = [
     b: "Compact Disk Player",
     c: "Cordless phone",
     d: "Dishwasher",
-    answer: "b"
+    answer: "b",
+    correctStatus: false
   },
   {
     question: "In 1990, in what percentage of U.S. married couples did the wife earn more money than the husband?",
-    a: 8,
-    b: 18,
-    c: 38,
-    d: 58,
-    answer: "b"
+    a: "8",
+    b: "18",
+    c: "38",
+    d: "58",
+    answer: "b",
+    correctStatus: false
   },
   {
     question: "During the 1980s for six consecutive years what breed of dog was the most popular in the U.S.?",
@@ -37,7 +41,8 @@ const QUESTIONS = [
     b: "German Shepherd",
     c: "Labrador Retriever",
     d: "Poodle",
-    answer: "a"
+    answer: "a",
+    correctStatus: false
   },
   {
     question: "In 1985, five percent of U.S. households had telephone answering machines. By 1990 what percentage of homes had answering machines?",
@@ -45,7 +50,8 @@ const QUESTIONS = [
     b: "15%",
     c: "31%",
     d: "51%",
-    answer: "c"
+    answer: "c",
+    correctStatus: false
   },
   {
     question: "The first black American pictured on a U.S. postage stamp was who?",
@@ -53,7 +59,8 @@ const QUESTIONS = [
     b: "Booker T Washington",
     c: "Louis Armstrong",
     d: "Joe Louis",
-    answer: "d"
+    answer: "d",
+    correctStatus: false
   },
   {
     question: "What did the \"D\" in \"D-Day\" stand for?",
@@ -61,7 +68,8 @@ const QUESTIONS = [
     b: "day",
     c: "Dwight (Eisenhower)",
     d: "Dunkirk",
-    answer: "b"
+    answer: "b",
+    correctStatus: false
   },
   {
     question: "Which of these characters turned 40 years old in 1990?",
@@ -69,7 +77,8 @@ const QUESTIONS = [
     b: "Bugs Bunny",
     c: "Mickey Mouse",
     d: "Fred Flintstone",
-    answer: "a"
+    answer: "a",
+    correctStatus: false
   },
   {
     question: "Before becoming George Bush's Secretary of Defense, what was Dick Cheney's position?",
@@ -77,7 +86,8 @@ const QUESTIONS = [
     b: "governor of New Hampshire",
     c: "secretary of defense under Ronald Reagan",
     d: "monkey",
-    answer: "a"
+    answer: "a",
+    correctStatus: false
   }
 ];
 
@@ -141,6 +151,8 @@ const QUESTION_TITLE_ELEMENT = `${QUESTION_ELEMENT_CLASS} h2`;
 const QUESTION_INDEX_ATTR_IDENTIFIER = 'data-question-index';
 const NEXT_BUTTON_CLASS = ".js-btn-next";
 const QUESTION_FEEDBACK_ELEMENT = '.js-question-feedback p';
+const QUESTION_COUNT_ELEMENT = '.js-question-count';
+const SCORE_COUNT_ELEMENT = '.js-score-count';
 
 
 // Hides/removes the start view when the start button is clicked
@@ -225,6 +237,7 @@ function handleNextButtonClicked() {
     renderQuestionElement(questionIndex);
     disableNextButton();
     clearFeedbackMessage();
+    setQuestionCount();
   });
 }
 
@@ -233,6 +246,7 @@ function handleAnswerChoiceClicked() {
     const answer = $(this).val();
     validateAnswer(answer);
     disableOtherAnswers($(this));
+    setScoreCount();
     enableNextButton();
   });
 }
@@ -242,10 +256,18 @@ function validateAnswer(answer) {
   const questionIndex = getQuestionIndex();
   const correctAnswer = QUESTIONS[questionIndex][QUESTIONS[questionIndex].answer];
   if (correctAnswer === answer) {
+    setCorrectStatus(answer, true);
     updateFeedbackMessage('You got that right!');
   } else {
+    setCorrectStatus(answer, false);
     updateFeedbackMessage(`Sorry, the correct answer was "${correctAnswer}".`);
   }
+}
+
+function setCorrectStatus(answer, status) {
+  console.log('setCorrectStatus', answer);
+  const questionIndex = getQuestionIndex();
+  QUESTIONS[questionIndex].correctStatus = status;
 }
 
 function updateFeedbackMessage(message) {
@@ -268,6 +290,28 @@ function disableNextButton() {
   $(NEXT_BUTTON_CLASS).attr('disabled', true);
 }
 
+function setQuestionCount() {
+  console.log('setQuestionCount');
+  $(QUESTION_COUNT_ELEMENT).html(`Question: #${getQuestionIndex() + 1} out of ${QUESTIONS.length}`);
+}
+
+function setScoreCount() {
+  console.log('setScoreCount');
+  console.log(getScoreCount());
+  $(SCORE_COUNT_ELEMENT).html(`Score: ${getScoreCount()} out of ${QUESTIONS.length} Correct`); 
+}
+
+function getScoreCount() {
+  let scoreCount = 0;
+  console.log('getScoreCount');
+  QUESTIONS.forEach(function(question) {
+    if(question.correctStatus === true) {
+      scoreCount += 1;
+    }
+  });
+  return scoreCount;
+}
+
 // Start the quiz
 // Watch for start button click
 // Watch for next button click
@@ -276,6 +320,7 @@ function startQuiz() {
   handleStartButtonClicked();
   handleNextButtonClicked();
   handleAnswerChoiceClicked();
+  setQuestionCount();
 }
 
 $(startQuiz());
