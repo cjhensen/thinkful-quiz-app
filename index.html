@@ -31,17 +31,16 @@
 
         <!-- Depending on the answer, show the appropriate feedback here
              along with changing input color and checkbox -->
-        <div class="question-feedback">
+        <div class="question-feedback js-question-feedback">
           <div class="row">
-            You got that right!
-            <!-- Sorry, the correct answer was B -->
+            <p></p>
           </div>
         </div><!-- / .question-feedback -->
 
         <!-- Button to move on to the next question.
              Should be disabled or hidden until answer is chosen -->
         <div class="row btn-next-question">
-          <button type="button" class="js-btn-next">Next Question</button>
+          <button type="button" class="js-btn-next" disabled>Next Question</button>
         </div><!-- / btn-next-question -->
 
         <!-- Quiz status gets updated on input select or at beginning of 
@@ -73,10 +72,5 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
 
-  <script type="text/javascript">
-    $('#question-answers').on('click', 'input', function() {
-      console.log('testing');
-    });
-  </script>
 </body>
 </html>

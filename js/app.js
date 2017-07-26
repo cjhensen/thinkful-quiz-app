@@ -89,15 +89,15 @@ const QUESTIONS = [
 // START SCREEN
 // Start the game
   // Click the start button
-    // Removes the start screen from the view
-    // Appends the question screen
-      // Shows the first question in the questions array
+    // Removes the start screen from the view √
+    // Appends the question screen √
+      // Shows the first question in the questions array √
 
 // QUESTION SCREEN
-  // Show the title of the question in the appropriate div
-  // Show the list of answers in the form
+  // Show the title of the question in the appropriate div √
+  // Show the list of answers in the form √
   // Show the current question number in the status field
-  // Show n/a for correctly answered number of questions
+  // Show n/a for correctly answered number of questions √
   // Be able to select an answer
     // Clicking on the input will select an answer
   // Validate the answer
@@ -140,6 +140,7 @@ const QUESTION_FORM = '.js-question-answers';
 const QUESTION_TITLE_ELEMENT = `${QUESTION_ELEMENT_CLASS} h2`;
 const QUESTION_INDEX_ATTR_IDENTIFIER = 'data-question-index';
 const NEXT_BUTTON_CLASS = ".js-btn-next";
+const QUESTION_FEEDBACK_ELEMENT = '.js-question-feedback p';
 
 
 // Hides/removes the start view when the start button is clicked
@@ -159,21 +160,21 @@ function generateQuestionElement(questionIndex) {
   return `<div class="question-element" data-question-index="${questionIndex}">
             <div class="row">
               <label class="col-6" for="answerChoice-0">${QUESTIONS[questionIndex].a}
-                <input type="radio" id="answerChoice-0" name="answer" value="0">
+                <input type="radio" id="answerChoice-0" name="answer" value="${QUESTIONS[questionIndex].a}">
               </label>
 
               <label class="col-6" for="answerChoice-1">${QUESTIONS[questionIndex].b}
-                <input type="radio" id="answerChoice-1" name="answer" value="1">
+                <input type="radio" id="answerChoice-1" name="answer" value="${QUESTIONS[questionIndex].b}">
               </label>
             </div>
 
             <div class="row">
               <label class="col-6" for="answerChoice-2">${QUESTIONS[questionIndex].c}
-                <input type="radio" id="answerChoice-2" name="answer" value="2">
+                <input type="radio" id="answerChoice-2" name="answer" value="${QUESTIONS[questionIndex].c}">
               </label>
 
               <label class="col-6" for="answerChoice-3">${QUESTIONS[questionIndex].d}
-                <input type="radio" id="answerChoice-3" name="answer" value="3">
+                <input type="radio" id="answerChoice-3" name="answer" value="${QUESTIONS[questionIndex].d}">
               </label>
             </div>
           </div>`
@@ -193,6 +194,7 @@ function handleStartButtonClicked() {
   $(START_BUTTON_CLASS).on('click', function() {
     console.log('start clicked');    
     hideStartView();
+    $(QUESTION_ELEMENT_CLASS).show();
     generateQuestionTitle(getQuestionIndex());
     renderQuestionElement(getQuestionIndex());
   });
@@ -221,7 +223,49 @@ function handleNextButtonClicked() {
     const questionIndex = getQuestionIndex() + 1;
     generateQuestionTitle(questionIndex);
     renderQuestionElement(questionIndex);
+    disableNextButton();
+    clearFeedbackMessage();
   });
+}
+
+function handleAnswerChoiceClicked() {
+  $(QUESTION_FORM).on('click', 'input', function() {
+    const answer = $(this).val();
+    validateAnswer(answer);
+    disableOtherAnswers($(this));
+    enableNextButton();
+  });
+}
+
+function validateAnswer(answer) {
+  console.log('selected answer', answer);
+  const questionIndex = getQuestionIndex();
+  const correctAnswer = QUESTIONS[questionIndex][QUESTIONS[questionIndex].answer];
+  if (correctAnswer === answer) {
+    updateFeedbackMessage('You got that right!');
+  } else {
+    updateFeedbackMessage(`Sorry, the correct answer was "${correctAnswer}".`);
+  }
+}
+
+function updateFeedbackMessage(message) {
+  $(QUESTION_FEEDBACK_ELEMENT).html(`${message}`);
+}
+
+function clearFeedbackMessage() {
+ $(QUESTION_FEEDBACK_ELEMENT).html(""); 
+}
+
+function disableOtherAnswers(chosenAnswer) {
+  // $(QUESTION_FORM).find('input').not(chosenAnswer).attr('disabled', true);
+  $(QUESTION_FORM).find('input').attr('disabled', true);
+}
+
+function enableNextButton() {
+  $(NEXT_BUTTON_CLASS).attr('disabled', false);
+}
+function disableNextButton() {
+  $(NEXT_BUTTON_CLASS).attr('disabled', true);
 }
 
 // Start the quiz
@@ -231,6 +275,7 @@ function startQuiz() {
   console.log('startQuiz');
   handleStartButtonClicked();
   handleNextButtonClicked();
+  handleAnswerChoiceClicked();
 }
 
 $(startQuiz());
