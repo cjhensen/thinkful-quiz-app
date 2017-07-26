@@ -11,62 +11,80 @@
 <body>
   <section role="main">
     <div class="container">
+      <div class="row">
+        <div class="start">
+          <h1>General U.S. History Quiz!</h1>
+          <hr />
+          <button type="button">START</button>
+        </div> <!-- /.start -->
+      </div>
 
-      <div class="start">
-        <h1>General U.S. History Quiz!</h1>
-        <hr />
-        <button type="button">START</button>
-      </div> <!-- /.start -->
-
-      <div class="question">
+      <div class="row">
+        <div class="question">
         <h2>Question?</h2>
+        </div>
+      </div>
 
-        <!-- Questions get changed here dynamically -->
-        <form id="question-answers">
-          <label for="answerChoice-0">Opt 0</label>
-          <input type="radio" id="answerChoice-0" name="answer" value="0">
+      <!-- Questions get changed here dynamically -->
+      <form id="question-answers">
+        <div class="row">
+          <label class="col-6" for="answerChoice-0">Opt 0
+            <input type="radio" id="answerChoice-0" name="answer" value="0">
+          </label>
 
-          <label for="answerChoice-1">Opt 1</label>
-          <input type="radio" id="answerChoice-1" name="answer" value="1">
+          <label class="col-6" for="answerChoice-1">Opt 1
+            <input type="radio" id="answerChoice-1" name="answer" value="1">
+          </label>
+        </div>
 
-          <label for="answerChoice-2">Opt 2</label>
-          <input type="radio" id="answerChoice-2" name="answer" value="2">
+        <div class="row">
+          <label class="col-6" for="answerChoice-2">Opt 2
+            <input type="radio" id="answerChoice-2" name="answer" value="2">
+          </label>
 
-          <label for="answerChoice-3">Opt 3</label>
-          <input type="radio" id="answerChoice-3" name="answer" value="3">
-        </form>
-        
-        <!-- Depending on the answer, show the appropriate feedback here
-             along with changing input color and checkbox -->
+          <label class="col-6" for="answerChoice-3">Opt 3
+            <input type="radio" id="answerChoice-3" name="answer" value="3">
+          </label>
+        </div>
+      </form>
+
+      <!-- Depending on the answer, show the appropriate feedback here
+           along with changing input color and checkbox -->
+      <div class="row">
         <div class="question-feedback">
           You got that right!
           <!-- Sorry, the correct answer was B -->
-        </div><!-- / .question-feedback -->
+        </div>
+      </div>
 
-        <!-- Button to move on to the next question.
-             Should be disabled or hidden until answer is chosen -->
+      <!-- Button to move on to the next question.
+           Should be disabled or hidden until answer is chosen -->
+      <div class="row">
         <button type="button">Next Question</button>
+      </div>
 
-        <!-- Quiz status gets updated on input select or at beginning of 
-             next question? -->
+      <!-- Quiz status gets updated on input select or at beginning of 
+           next question? -->
+      <div class="row">
         <div class="quiz-status">
-          <div class="question-count">
+          <div class="question-count col-6">
             Question: # out of 10
           </div>
-          <div class="score-count">
+          <div class="score-count col-6">
             Score: 1 out of 3 correct
           </div>
-        </div><!-- / .quiz-status -->
+        </div>
+      </div>
 
-      </div><!-- / .question -->
 
-      <div class="restart">
+      <div class="row">
+        <div class="restart">
+          <h2>You got # out of 10 questions correct!</h2>
+          <button type="button">Take the quiz again!</button>
+        </div><!-- / .restart -->
+      </div>
 
-        <h2>You got # out of 10 questions correct!</h2>
-        <button type="button">Take the quiz again!</button>
-      </div><!-- / .restart -->
-
-    </div><!== / .container -->
+    </div><!-- / .container -->
   </section>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
