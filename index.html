@@ -11,19 +11,20 @@
 <body>
   <section role="main">
     <div class="container">
-      <div class="row">
-        <div class="start">
+    
+      <div class="start">
+        <div class="row">
           <h1>General U.S. History Quiz!</h1>
           <hr />
           <button type="button">START</button>
-        </div> <!-- /.start -->
-      </div>
-
-      <div class="row">
-        <div class="question">
-        <h2>Question?</h2>
         </div>
-      </div>
+      </div> <!-- /.start -->
+
+      <div class="question">
+        <div class="row">
+          <h2>Question?</h2>
+        </div>
+      </div><!-- / .question -->
 
       <!-- Questions get changed here dynamically -->
       <form id="question-answers">
@@ -46,27 +47,27 @@
             <input type="radio" id="answerChoice-3" name="answer" value="3">
           </label>
         </div>
-      </form>
+      </form><!-- / #question-answers -->
 
       <!-- Depending on the answer, show the appropriate feedback here
            along with changing input color and checkbox -->
-      <div class="row">
-        <div class="question-feedback">
+      <div class="question-feedback">
+        <div class="row">
           You got that right!
           <!-- Sorry, the correct answer was B -->
         </div>
-      </div>
+      </div><!-- / .question-feedback -->
 
       <!-- Button to move on to the next question.
            Should be disabled or hidden until answer is chosen -->
-      <div class="row">
+      <div class="row btn-next-question">
         <button type="button">Next Question</button>
-      </div>
+      </div><!-- / btn-next-question -->
 
       <!-- Quiz status gets updated on input select or at beginning of 
            next question? -->
-      <div class="row">
-        <div class="quiz-status">
+      <div class="quiz-status">
+        <div class="row">
           <div class="question-count col-6">
             Question: # out of 10
           </div>
@@ -74,15 +75,15 @@
             Score: 1 out of 3 correct
           </div>
         </div>
-      </div>
+      </div><!-- / .quiz-status -->
 
 
-      <div class="row">
-        <div class="restart">
+      <div class="restart">
+        <div class="row">
           <h2>You got # out of 10 questions correct!</h2>
           <button type="button">Take the quiz again!</button>
-        </div><!-- / .restart -->
-      </div>
+        </div>
+      </div><!-- / .restart -->
 
     </div><!-- / .container -->
   </section>
