@@ -80,3 +80,190 @@ const QUESTIONS = [
     answer: "a"
   }
 ];
+
+
+
+
+
+
+// START SCREEN
+// Start the game
+  // Click the start button
+    // Removes the start screen from the view
+    // Appends the question screen
+      // Shows the first question in the questions array
+
+// QUESTION SCREEN
+  // Show the title of the question in the appropriate div
+  // Show the list of answers in the form
+  // Show the current question number in the status field
+  // Show n/a for correctly answered number of questions
+  // Be able to select an answer
+    // Clicking on the input will select an answer
+  // Validate the answer
+    // Check if the select answer matches the correct 'answer' field in the data
+      // If it does
+        // Change the input css appropriately
+        // Append the success message to the feedback div
+        // Make the next question button active
+        // updated the answerStatus to correct or incorrect in the array 
+          // (which I will use to count how many are correct out of the total)
+      // If it does not
+        // Change the input css appropriately
+        // Append the failure message to the feedback div
+        // Make the next question button active
+  // Moving on to the next question
+    // Once an answer has been selected and validated
+      // The next button becomes active
+        // Clicking the next button,
+          // Clears the form of the previous question
+          // Shows the title of the NEXT question in the appropriate div
+          // Updates the status of the current question
+          // Updates the status of correctly answered questions
+
+          // Appends the next question
+          // Listens for next action
+
+  // RESTART SCREEN
+    // Once the user is on the last question,
+      // Change the button text to finish
+      // Show the restart screen
+        // Game stats with number of right vs wrong
+        // Restart button
+          // Shows the question screen again, and restarts that whole process
+          // Resets data as well
+
+
+const START_BUTTON_CLASS = '.js-btn-start';
+const QUESTION_ELEMENT_CLASS = '.js-question';
+const QUESTION_FORM = '.js-question-answers';
+const QUESTION_TITLE_ELEMENT = `${QUESTION_ELEMENT_CLASS} h2`;
+const QUESTION_INDEX_ATTR_IDENTIFIER = 'data-question-index';
+const NEXT_BUTTON_CLASS = ".js-btn-next";
+
+
+// Hides/removes the start view when the start button is clicked
+function hideStartView() {
+  const startView = $('.start');
+  startView.remove(); // or startView.hide(); Depends if I still need it in the DOM
+}
+
+// Clear the question title first then set it to the current question
+function generateQuestionTitle(questionIndex) {
+  $(QUESTION_TITLE_ELEMENT).html("");
+  $(QUESTION_TITLE_ELEMENT).html(QUESTIONS[questionIndex].question);
+}
+
+// Generate the HTML for the current question
+function generateQuestionElement(questionIndex) {
+  return `<div class="question-element" data-question-index="${questionIndex}">
+            <div class="row">
+              <label class="col-6" for="answerChoice-0">${QUESTIONS[questionIndex].a}
+                <input type="radio" id="answerChoice-0" name="answer" value="0">
+              </label>
+
+              <label class="col-6" for="answerChoice-1">${QUESTIONS[questionIndex].b}
+                <input type="radio" id="answerChoice-1" name="answer" value="1">
+              </label>
+            </div>
+
+            <div class="row">
+              <label class="col-6" for="answerChoice-2">${QUESTIONS[questionIndex].c}
+                <input type="radio" id="answerChoice-2" name="answer" value="2">
+              </label>
+
+              <label class="col-6" for="answerChoice-3">${QUESTIONS[questionIndex].d}
+                <input type="radio" id="answerChoice-3" name="answer" value="3">
+              </label>
+            </div>
+          </div>`
+}
+
+// Adds the generated html for the question to the page
+function renderQuestionElement(questionIndex) {
+  console.log('renderQuestionElement');
+  $(QUESTION_FORM).html(generateQuestionElement(questionIndex));
+}
+
+
+// Handles all events associated with clicking the start button:
+  // Hiding the start view
+  // Showing the questions
+function handleStartButtonClicked() {
+  $(START_BUTTON_CLASS).on('click', function() {
+    console.log('start clicked');    
+    hideStartView();
+    generateQuestionTitle(getQuestionIndex());
+    renderQuestionElement(getQuestionIndex());
+  });
+}
+
+// Gets the index of the current question
+// Checks the element that is added, and its data attribute
+// If it does not exist (initial start page), then default to 0
+// If it does exist, it uses the index from the data attribute
+function getQuestionIndex() {
+  console.log('getQuestionIndex');
+  if($('.question-element').attr(QUESTION_INDEX_ATTR_IDENTIFIER)) {
+    return parseInt($('.question-element').attr(QUESTION_INDEX_ATTR_IDENTIFIER), 10);
+  } else {
+    return 0;
+  }
+}
+
+// Watch the next button for a click
+// Get and increment the question index for the next question
+// Generate the title using the index
+// Render the question using the index
+function handleNextButtonClicked() {
+  $(NEXT_BUTTON_CLASS).on('click', function() {
+    console.log('handleNextButtonClicked');
+    const questionIndex = getQuestionIndex() + 1;
+    generateQuestionTitle(questionIndex);
+    renderQuestionElement(questionIndex);
+  });
+}
+
+// Start the quiz
+// Watch for start button click
+// Watch for next button click
+function startQuiz() {
+  console.log('startQuiz');
+  handleStartButtonClicked();
+  handleNextButtonClicked();
+}
+
+$(startQuiz());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

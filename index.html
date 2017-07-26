@@ -11,71 +11,53 @@
 <body>
   <section role="main">
     <div class="container">
-    
+
       <div class="start">
         <div class="row">
           <h1>General U.S. History Quiz!</h1>
           <hr />
-          <button type="button">START</button>
+          <button type="button" class="js-btn-start">START</button>
         </div>
       </div> <!-- /.start -->
 
-      <div class="question">
+      <div class="question js-question">
         <div class="row">
-          <h2>Question?</h2>
+          <h2></h2>
         </div>
+
+        <!-- Questions get changed here dynamically -->
+        <form id="question-answers" class="js-question-answers">
+        </form><!-- / #question-answers -->
+
+        <!-- Depending on the answer, show the appropriate feedback here
+             along with changing input color and checkbox -->
+        <div class="question-feedback">
+          <div class="row">
+            You got that right!
+            <!-- Sorry, the correct answer was B -->
+          </div>
+        </div><!-- / .question-feedback -->
+
+        <!-- Button to move on to the next question.
+             Should be disabled or hidden until answer is chosen -->
+        <div class="row btn-next-question">
+          <button type="button" class="js-btn-next">Next Question</button>
+        </div><!-- / btn-next-question -->
+
+        <!-- Quiz status gets updated on input select or at beginning of 
+             next question? -->
+        <div class="quiz-status">
+          <div class="row">
+            <div class="question-count col-6">
+              Question: # out of 10
+            </div>
+            <div class="score-count col-6">
+              Score: 1 out of 3 correct
+            </div>
+          </div>
+        </div><!-- / .quiz-status -->
+
       </div><!-- / .question -->
-
-      <!-- Questions get changed here dynamically -->
-      <form id="question-answers">
-        <div class="row">
-          <label class="col-6" for="answerChoice-0">Opt 0
-            <input type="radio" id="answerChoice-0" name="answer" value="0">
-          </label>
-
-          <label class="col-6" for="answerChoice-1">Opt 1
-            <input type="radio" id="answerChoice-1" name="answer" value="1">
-          </label>
-        </div>
-
-        <div class="row">
-          <label class="col-6" for="answerChoice-2">Opt 2
-            <input type="radio" id="answerChoice-2" name="answer" value="2">
-          </label>
-
-          <label class="col-6" for="answerChoice-3">Opt 3
-            <input type="radio" id="answerChoice-3" name="answer" value="3">
-          </label>
-        </div>
-      </form><!-- / #question-answers -->
-
-      <!-- Depending on the answer, show the appropriate feedback here
-           along with changing input color and checkbox -->
-      <div class="question-feedback">
-        <div class="row">
-          You got that right!
-          <!-- Sorry, the correct answer was B -->
-        </div>
-      </div><!-- / .question-feedback -->
-
-      <!-- Button to move on to the next question.
-           Should be disabled or hidden until answer is chosen -->
-      <div class="row btn-next-question">
-        <button type="button">Next Question</button>
-      </div><!-- / btn-next-question -->
-
-      <!-- Quiz status gets updated on input select or at beginning of 
-           next question? -->
-      <div class="quiz-status">
-        <div class="row">
-          <div class="question-count col-6">
-            Question: # out of 10
-          </div>
-          <div class="score-count col-6">
-            Score: 1 out of 3 correct
-          </div>
-        </div>
-      </div><!-- / .quiz-status -->
 
 
       <div class="restart">
