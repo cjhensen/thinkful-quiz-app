@@ -98,7 +98,7 @@ const QUESTIONS = [
 
 // START SCREEN
 // Start the game
-  // Click the start button
+  // Click the start button √
     // Removes the start screen from the view √
     // Appends the question screen √
       // Shows the first question in the questions array √
@@ -106,33 +106,33 @@ const QUESTIONS = [
 // QUESTION SCREEN
   // Show the title of the question in the appropriate div √
   // Show the list of answers in the form √
-  // Show the current question number in the status field
+  // Show the current question number in the status field √
   // Show n/a for correctly answered number of questions √
-  // Be able to select an answer
-    // Clicking on the input will select an answer
-  // Validate the answer
+  // Be able to select an answer √
+    // Clicking on the input will select an answer √
+  // Validate the answer √
     // Check if the select answer matches the correct 'answer' field in the data
       // If it does
         // Change the input css appropriately
-        // Append the success message to the feedback div
-        // Make the next question button active
-        // updated the answerStatus to correct or incorrect in the array 
+        // Append the success message to the feedback div √
+        // Make the next question button active √
+        // updated the answerStatus to correct or incorrect in the array √
           // (which I will use to count how many are correct out of the total)
       // If it does not
         // Change the input css appropriately
-        // Append the failure message to the feedback div
-        // Make the next question button active
+        // Append the failure message to the feedback div √
+        // Make the next question button active √
   // Moving on to the next question
     // Once an answer has been selected and validated
-      // The next button becomes active
+      // The next button becomes active √
         // Clicking the next button,
-          // Clears the form of the previous question
-          // Shows the title of the NEXT question in the appropriate div
-          // Updates the status of the current question
-          // Updates the status of correctly answered questions
+          // Clears the form of the previous question √
+          // Shows the title of the NEXT question in the appropriate div √
+          // Updates the status of the current question √
+          // Updates the status of correctly answered questions √
 
-          // Appends the next question
-          // Listens for next action
+          // Appends the next question √
+          // Listens for next action √
 
   // RESTART SCREEN
     // Once the user is on the last question,
