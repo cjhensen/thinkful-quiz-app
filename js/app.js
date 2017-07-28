@@ -54,10 +54,17 @@ const NEXT_BUTTON_CLASS = ".js-btn-next";
 const QUESTION_FEEDBACK_ELEMENT = '.js-question-feedback p';
 const QUESTION_COUNT_ELEMENT = '.js-question-count';
 const SCORE_COUNT_ELEMENT = '.js-score-count';
+// const RESTART_ELEMENT_CLASS = '.js-restart';
+// const RESTART_BUTTON_CLASS = ".js-btn-restart";
 
 const applicationState = {
   dataQuestionIndex: 0,
-  correctQuestionStatus: []
+  correctQuestionStatus: [],
+  resetState: function() {
+    console.log('this', this);
+    this.dataQuestionIndex = 0;
+    this.correctQuestionStatus = [];
+  }
 }
 
 
@@ -138,14 +145,48 @@ function getQuestionIndex() {
 // Render the question using the index
 function handleNextButtonClicked() {
   console.log('handleNextButtonClicked');
-  applicationState.dataQuestionIndex += 1;
-  const questionIndex = getQuestionIndex();
-  generateQuestionTitle(questionIndex);
-  renderQuestionElement(questionIndex);
-  disableNextButton();
-  clearFeedbackMessage();
-  setQuestionCount();
+  console.log('aqi', applicationState.dataQuestionIndex);
+  // if(applicationState.dataQuestionIndex === QUESTIONS.length-2) {
+  //   changeNextButton("Finish Quiz");
+  // }
+  // if(applicationState.dataQuestionIndex === QUESTIONS.length-1) {
+  //   hideQuestionView();
+  //   showRestartQuiz();
+  // } else {
+    applicationState.dataQuestionIndex += 1;
+    const questionIndex = getQuestionIndex();
+    generateQuestionTitle(questionIndex);
+    renderQuestionElement(questionIndex);
+    disableNextButton();
+    clearFeedbackMessage();
+    setQuestionCount();
+  // }
 }
+
+// function showRestartQuiz() {
+//   console.log('showRestartQuiz');
+//   $(RESTART_ELEMENT_CLASS).show();
+// }
+
+// function hideQuestionView() {
+//   $(QUESTION_ELEMENT_CLASS).hide();
+// }
+
+// Rework this
+// function handleRestartButtonClicked() {
+//   console.log('handleRestartButtonClicked');
+//   updateFeedbackMessage("");
+//   changeNextButton("Next Question");
+//   setQuestionCount();
+//   setScoreCount();
+//   $(QUESTION_ELEMENT_CLASS).show(); // could re-do this with a function
+//   generateQuestionTitle(getQuestionIndex());
+//   renderQuestionElement(getQuestionIndex());
+// }
+
+// function changeNextButton(text) {
+//   $(NEXT_BUTTON_CLASS).html(text);
+// }
 
 function handleAnswerChoiceClicked() {
   const answer = $(this).val();
@@ -224,6 +265,7 @@ function assignEventHandlers() {
   $(START_BUTTON_CLASS).on('click', handleStartButtonClicked);
   $(NEXT_BUTTON_CLASS).on('click', handleNextButtonClicked);
   $(QUESTION_FORM).on('click', 'input', handleAnswerChoiceClicked);
+  // $(RESTART_BUTTON_CLASS).on('click', handleRestartButtonClicked);
 }
 // Start the quiz
 // Watch for start button click
