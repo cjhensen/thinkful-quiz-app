@@ -16,7 +16,7 @@
         <div class="row">
           <h1>General U.S. History Quiz!</h1>
           <hr />
-          <button type="button" class="js-startView--btn-start">START</button>
+          <button type="button" class="js-startView--btn-start btn-start">START</button>
         </div>
       </div> <!-- /.start -->
 
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Questions get changed here dynamically -->
-        <form id="question-answers" class="js-questionView--answers">
+        <form id="question-answers" class="js-questionView--answers question-answers">
         </form><!-- / #question-answers -->
 
         <!-- Depending on the answer, show the appropriate feedback here
@@ -40,11 +40,11 @@
         <!-- Button to move on to the next question.
              Should be disabled or hidden until answer is chosen -->
         <div class="row btn-next-question">
-          <button type="button" class="js-questionView--btn-next" disabled>Next Question</button>
+          <button type="button" class="js-questionView--btn-next btn-next" disabled>Next Question</button>
         </div><!-- / btn-next-question -->
 
-        <div class="row btn-finish">
-          <button type="button" class="js-questionView--btn-finish" disabled>Finish Quiz</button>
+        <div class="row">
+          <button type="button" class="js-questionView--btn-finish btn-finish" disabled>Finish Quiz</button>
         </div><!-- / btn-next-question -->
 
         <!-- Quiz status gets updated on input select or at beginning of 
@@ -64,7 +64,7 @@
       <div class="restart js-restartView--restart">
         <div class="row">
           <h2></h2>
-          <button type="button" class="js-restartView--btn-restart">Take the quiz again!</button>
+          <button type="button" class="js-restartView--btn-restart btn-restart">Take the quiz again!</button>
         </div>
       </div><!-- / .restart -->
 

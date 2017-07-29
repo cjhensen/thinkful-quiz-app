@@ -69,21 +69,21 @@ const questionView = {
     console.log('generateQuestionElement');
     return `<div class="question-element">
             <div class="row">
-              <label class="col-6" for="answerChoice-0">${QUESTIONS[questionIndex].a}
+              <label class="col-6 answer-choice" for="answerChoice-0">${QUESTIONS[questionIndex].a}
                 <input type="radio" id="answerChoice-0" name="answer" value="${QUESTIONS[questionIndex].a}">
               </label>
 
-              <label class="col-6" for="answerChoice-1">${QUESTIONS[questionIndex].b}
+              <label class="col-6 answer-choice" for="answerChoice-1">${QUESTIONS[questionIndex].b}
                 <input type="radio" id="answerChoice-1" name="answer" value="${QUESTIONS[questionIndex].b}">
               </label>
             </div>
 
             <div class="row">
-              <label class="col-6" for="answerChoice-2">${QUESTIONS[questionIndex].c}
+              <label class="col-6 answer-choice" for="answerChoice-2">${QUESTIONS[questionIndex].c}
                 <input type="radio" id="answerChoice-2" name="answer" value="${QUESTIONS[questionIndex].c}">
               </label>
 
-              <label class="col-6" for="answerChoice-3">${QUESTIONS[questionIndex].d}
+              <label class="col-6 answer-choice" for="answerChoice-3">${QUESTIONS[questionIndex].d}
                 <input type="radio" id="answerChoice-3" name="answer" value="${QUESTIONS[questionIndex].d}">
               </label>
             </div>
@@ -97,16 +97,18 @@ const questionView = {
     console.log('getQuestionIndex');
     return applicationState.dataQuestionIndex;
   },
-  validateAnswer(answer) {
+  validateAnswer(answer, answerElement) {
     console.log('validateAnswer');
     const questionIndex = this.getQuestionIndex();
     const correctAnswer = QUESTIONS[questionIndex][QUESTIONS[questionIndex].answer];
     if (correctAnswer === answer) {
       this.setCorrectStatus(answer, true);
       this.updateFeedbackMessage('You got that right!');
+      questionView.updateAnswerChoiceFeedback(answerElement, true);
     } else {
       this.setCorrectStatus(answer, false);
       this.updateFeedbackMessage(`Sorry, the correct answer was "${correctAnswer}".`);
+      questionView.updateAnswerChoiceFeedback(answerElement, false);
     }
   },
   setCorrectStatus(answer, status) {
@@ -118,11 +120,11 @@ const questionView = {
   },
   updateFeedbackMessage(message) {
     console.log('updateFeedbackMessage');
-    $(questionViewFeedback).html(`${message}`);
+    $(questionViewFeedback).find('p').html(`${message}`);
   },
   clearFeedbackMessage() {
     console.log('clearFeedbackMessage');
-    $(questionViewFeedback).html(""); 
+    $(questionViewFeedback).find('p').html(""); 
   },
   disableOtherAnswers(chosenAnswer) {
     console.log('disableOtherAnswers');
@@ -144,6 +146,10 @@ const questionView = {
     console.log('hideNextButton');
     $(questionViewNextBtn).hide();
   },
+  showFinishButton() {
+    console.log('showFinishButton');
+    $(questionViewFinishBtn).show();
+  },
   hideFinishButton() {
     console.log('hideFinishButton');
     $(questionViewFinishBtn).hide();
@@ -154,10 +160,6 @@ const questionView = {
   },
   disableFinishButton() {
     $(questionViewFinishBtn).attr('disabled', true);
-  },
-  showFinishButton() {
-    console.log('showFinishButton');
-    $(questionViewFinishBtn).show();
   },
   setQuestionCount() {
     console.log('setQuestionCount');
@@ -176,6 +178,17 @@ const questionView = {
   setScoreCount() {
     console.log('setScoreCount');
     $(questionViewScore).html(`Score: ${this.getScoreCount()} out of ${QUESTIONS.length} Correct`); 
+  },
+  updateAnswerChoiceFeedback(answerElement, status) {
+    console.log('ANSWER ELEMENT', answerElement);
+    // console.log('PARENT', $(answerChoice).parent());
+    if(status === true) {
+      $(answerElement).parent().addClass('answer-correct');
+    }
+    if(status === false) {
+      $(answerElement).parent().addClass('answer-incorrect');
+    }
+
   },
   handleNextButtonClicked() {
     // same 'this' clicking on issue, so need to use full object name
@@ -200,8 +213,9 @@ const questionView = {
     if(questionIndex === QUESTIONS.length-1) {
       questionView.enableFinishButton();
     }
+    const answerElement = $(this);
     const answer = $(this).val();
-    questionView.validateAnswer(answer);
+    questionView.validateAnswer(answer, answerElement);
     questionView.disableOtherAnswers($(this));
     questionView.setScoreCount();
     questionView.enableNextButton();
