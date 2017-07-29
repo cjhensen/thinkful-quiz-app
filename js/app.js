@@ -38,12 +38,12 @@
 
   // RESTART SCREEN
     // Once the user is on the last question,
-      // Change the button text to finish
-      // Show the restart screen
-        // Game stats with number of right vs wrong
-        // Restart button
-          // Shows the question screen again, and restarts that whole process
-          // Resets data as well
+      // Change the button text to finish √
+      // Show the restart screen √
+        // Game stats with number of right vs wrong √
+        // Restart button √
+          // Shows the question screen again, and restarts that whole process √
+          // Resets data as well √
 
 
 const START_BUTTON_CLASS = '.js-btn-start';
