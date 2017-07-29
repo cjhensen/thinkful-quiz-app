@@ -276,6 +276,7 @@ function startQuiz() {
   console.log('startQuiz');
   assignEventHandlers();
   setQuestionCount();
+  console.log('resetstate type', typeof(applicationState.resetState));
 }
 
 $(startQuiz());
