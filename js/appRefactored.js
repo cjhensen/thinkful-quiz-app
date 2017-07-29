@@ -232,6 +232,7 @@ const restartView = {
       $(restartViewEndMessage).html(`Yay! You got ${questionView.getScoreCount()} out of ${QUESTIONS.length} correct. Want to take it again?`);
     }
   },
+  // same 'input' issue
   handleRestartButtonClicked() {
     questionView.disableFinishButton();
     questionView.disableNextButton();
