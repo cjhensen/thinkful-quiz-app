@@ -69,23 +69,27 @@ const questionView = {
     console.log('generateQuestionElement');
     return `<div class="question-element">
             <div class="row">
-              <label class="col-6 answer-choice" for="answerChoice-0">${QUESTIONS[questionIndex].a}
-                <input type="radio" id="answerChoice-0" name="answer0" value="${QUESTIONS[questionIndex].a}">
-              </label>
+              <fieldset>
+                <label class="col-6 answer-choice" for="answerChoice-0">${QUESTIONS[questionIndex].a}
+                  <input type="radio" id="answerChoice-0" name="answer0" value="${QUESTIONS[questionIndex].a}">
+                </label>
 
-              <label class="col-6 answer-choice" for="answerChoice-1">${QUESTIONS[questionIndex].b}
-                <input type="radio" id="answerChoice-1" name="answer1" value="${QUESTIONS[questionIndex].b}">
-              </label>
-            </div>
+                <label class="col-6 answer-choice" for="answerChoice-1">${QUESTIONS[questionIndex].b}
+                  <input type="radio" id="answerChoice-1" name="answer1" value="${QUESTIONS[questionIndex].b}">
+                </label>
+                </fieldset>
+              </div>
 
-            <div class="row">
-              <label class="col-6 answer-choice" for="answerChoice-2">${QUESTIONS[questionIndex].c}
-                <input type="radio" id="answerChoice-2" name="answer2" value="${QUESTIONS[questionIndex].c}">
-              </label>
+              <div class="row">
+              <fieldset>
+                <label class="col-6 answer-choice" for="answerChoice-2">${QUESTIONS[questionIndex].c}
+                  <input type="radio" id="answerChoice-2" name="answer2" value="${QUESTIONS[questionIndex].c}">
+                </label>
 
-              <label class="col-6 answer-choice" for="answerChoice-3">${QUESTIONS[questionIndex].d}
-                <input type="radio" id="answerChoice-3" name="answer3" value="${QUESTIONS[questionIndex].d}">
-              </label>
+                <label class="col-6 answer-choice" for="answerChoice-3">${QUESTIONS[questionIndex].d}
+                  <input type="radio" id="answerChoice-3" name="answer3" value="${QUESTIONS[questionIndex].d}">
+                </label>
+              </fieldset>
             </div>
           </div>`
         },
