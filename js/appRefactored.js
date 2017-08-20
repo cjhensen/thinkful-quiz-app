@@ -70,21 +70,21 @@ const questionView = {
     return `<div class="question-element">
             <div class="row">
               <label class="col-6 answer-choice" for="answerChoice-0">${QUESTIONS[questionIndex].a}
-                <input type="radio" id="answerChoice-0" name="answer" value="${QUESTIONS[questionIndex].a}">
+                <input type="radio" id="answerChoice-0" name="answer0" value="${QUESTIONS[questionIndex].a}">
               </label>
 
               <label class="col-6 answer-choice" for="answerChoice-1">${QUESTIONS[questionIndex].b}
-                <input type="radio" id="answerChoice-1" name="answer" value="${QUESTIONS[questionIndex].b}">
+                <input type="radio" id="answerChoice-1" name="answer1" value="${QUESTIONS[questionIndex].b}">
               </label>
             </div>
 
             <div class="row">
               <label class="col-6 answer-choice" for="answerChoice-2">${QUESTIONS[questionIndex].c}
-                <input type="radio" id="answerChoice-2" name="answer" value="${QUESTIONS[questionIndex].c}">
+                <input type="radio" id="answerChoice-2" name="answer2" value="${QUESTIONS[questionIndex].c}">
               </label>
 
               <label class="col-6 answer-choice" for="answerChoice-3">${QUESTIONS[questionIndex].d}
-                <input type="radio" id="answerChoice-3" name="answer" value="${QUESTIONS[questionIndex].d}">
+                <input type="radio" id="answerChoice-3" name="answer3" value="${QUESTIONS[questionIndex].d}">
               </label>
             </div>
           </div>`
